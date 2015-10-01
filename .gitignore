@@ -1,6 +1,9 @@
 /target
 /classes
 /checkouts
+/example/target
+/example/classes
+/example/checkouts
 pom.xml
 pom.xml.asc
 *.jar
