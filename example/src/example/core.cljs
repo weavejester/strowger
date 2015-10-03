@@ -3,4 +3,4 @@
 
 (enable-console-print!)
 
-(strowger/foo "foobar")
+(prn strowger/keycode->keyword)
