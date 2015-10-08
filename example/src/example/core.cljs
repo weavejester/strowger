@@ -7,10 +7,10 @@
   (js/console.log event))
 
 (defn print-key [event]
-  (prn (strowger/keycode->keyword (.-keyCode event))))
+  (prn (strowger/event-key event)))
 
 (defn print-button [event]
-  (prn (strowger/button->keyword (.-button event))))
+  (prn (strowger/event-button event)))
 
 (doto js/window
   (strowger/add-listener ::keyboard [:keydown] print-key)

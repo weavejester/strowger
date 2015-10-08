@@ -26,6 +26,12 @@
 (def button->keyword
   (set/map-invert keyword->button))
 
+(defn event-key [event]
+  (keycode->keyword (.-keyCode event)))
+
+(defn event-button [event]
+  (button->keyword (.-button event)))
+
 (defn- listener-map [element]
   (or (.-strowgerListeners element) {}))
 
