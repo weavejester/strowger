@@ -3,4 +3,7 @@
 
 (enable-console-print!)
 
-(prn strowger/keycode->keyword)
+(defn print-key [event]
+  (prn (strowger/keycode->keyword (.-keyCode event))))
+
+(strowger/add-listener js/window :keydown print-key)
