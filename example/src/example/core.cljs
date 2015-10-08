@@ -10,7 +10,7 @@
   (prn (strowger/keycode->keyword (.-keyCode event))))
 
 (defn print-button [event]
-  (prn (.-button event)))
+  (prn (strowger/button->keyword (.-button event))))
 
 (doto js/window
   (strowger/add-listener ::keyboard [:keydown] print-key)

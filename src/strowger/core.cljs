@@ -20,6 +20,12 @@
 (def keycode->keyword
   (set/map-invert keyword->keycode))
 
+(def keyword->button
+  {:left 0, :middle 1, :right 2})
+
+(def button->keyword
+  (set/map-invert keyword->button))
+
 (defn- listener-map [element]
   (or (.-strowgerListeners element) {}))
 
