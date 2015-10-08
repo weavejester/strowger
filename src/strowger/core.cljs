@@ -20,8 +20,19 @@
 (def keycode->keyword
   (set/map-invert keyword->keycode))
 
-(defn add-listener [element type listener]
-  (.addEventListener element (name type) listener))
+(defn- listener-map [element]
+  (or (.-strowgerListeners element) {}))
 
-(defn remove-listener [element type]
-  (.removeEventListener element (name type)))
+(defn- update-listener-map [element f & args]
+  (set! (.-strowgerListeners element) (apply f (listener-map element) args)))
+
+(defn add-listener [element key types listener]
+  (doseq [type types]
+    (doto element
+      (update-listener-map assoc-in [type key] listener)
+      (.addEventListener (name type) listener))))
+
+(defn remove-listener [element key]
+  (doseq [[type listeners] (listener-map element)]
+    (when-let [listener (listeners key)]
+      (.removeEventListener element (name type) listener))))
