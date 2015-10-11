@@ -13,7 +13,7 @@
   (prn (strowger/event-button event)))
 
 (doto js/window
-  (strowger/add-listener ::keyboard [:keydown] print-key)
-  (strowger/add-listener ::mouse [:click] print-button)
-  (strowger/add-listener ::print [:keydown :click] print-event)
-  (strowger/remove-listener ::print))
+  (strowger/add-listeners ::keyboard {:keydown print-key})
+  (strowger/add-listeners ::mouse {:click print-button})
+  (strowger/add-listeners ::print {:keydown print-event, :click print-event})
+  (strowger/remove-listeners ::print))

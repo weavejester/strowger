@@ -35,16 +35,24 @@
 (defn- listener-map [element]
   (or (.-strowgerListeners element) {}))
 
-(defn- update-listener-map [element f & args]
+(defn- update-listener-map! [element f & args]
   (set! (.-strowgerListeners element) (apply f (listener-map element) args)))
 
-(defn add-listener [element key types listener]
-  (doseq [type types]
-    (doto element
-      (update-listener-map assoc-in [type key] listener)
-      (.addEventListener (name type) listener))))
+(defn- add-dom-listeners [element listeners]
+  (doseq [[type listener] listeners]
+    (.addEventListener element (name type) listener)))
 
-(defn remove-listener [element key]
-  (doseq [[type listeners] (listener-map element)]
-    (when-let [listener (listeners key)]
-      (.removeEventListener element (name type) listener))))
+(defn- remove-dom-listeners [element listeners]
+  (doseq [[type listener] listeners]
+    (.removeEventListener element (name type) listener)))
+
+(defn remove-listeners [element key]
+  (doto element
+    (remove-dom-listeners (-> element listener-map (get key)))
+    (update-listener-map! dissoc key)))
+
+(defn add-listeners [element key listeners]
+  (doto element
+    (remove-listeners key)
+    (update-listener-map! assoc key listeners)
+    (add-dom-listeners listeners)))
