@@ -8,7 +8,8 @@
   :plugins [[lein-cljsbuild "1.1.0"]
             [lein-codox "0.9.0"]]
   :codox {:language :clojurescript
-          :metadata {:doc/format :markdown}}
+          :metadata {:doc/format :markdown}
+          :output-path "doc"}
   :cljsbuild
   {:builds {:main {:source-paths ["src"]
                    :compiler {:output-to "target/main.js"
