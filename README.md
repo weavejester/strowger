@@ -10,7 +10,7 @@ To install, add the following dependency to your project file:
 
 ## Documentation
 
-* [API Docs](http://weavejester.github.io/strowger/strowger.core.html)
+* [API Docs](https://weavejester.github.io/strowger/strowger.event.html)
 
 ## License
 

@@ -1,6 +1,6 @@
-(ns strowger.core-test
+(ns strowger.event-test
   (:require [cljs.test :refer :all]
-            [strowger.core :refer :all]))
+            [strowger.event :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

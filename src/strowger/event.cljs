@@ -1,4 +1,4 @@
-(ns strowger.core
+(ns strowger.event
   "Functions for managing DOM events."
   (:require [clojure.set :as set]
             [clojure.string :as str]
