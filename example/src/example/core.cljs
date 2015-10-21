@@ -1,5 +1,5 @@
 (ns example.core
-  (:require [strowger.core :as strowger]))
+  (:require [strowger.event :as event]))
 
 (enable-console-print!)
 
@@ -7,13 +7,13 @@
   (js/console.log event))
 
 (defn print-key [event]
-  (prn (strowger/event-key event)))
+  (prn (event/event-key event)))
 
 (defn print-button [event]
-  (prn (strowger/event-button event)))
+  (prn (event/event-button event)))
 
 (doto js/window
-  (strowger/add-listeners ::keyboard {:keydown print-key})
-  (strowger/add-listeners ::mouse {:click print-button})
-  (strowger/add-listeners ::print {:keydown print-event, :click print-event})
-  (strowger/remove-listeners ::print))
+  (event/add-listeners ::keyboard {:keydown print-key})
+  (event/add-listeners ::mouse {:click print-button})
+  (event/add-listeners ::print {:keydown print-event, :click print-event})
+  (event/remove-listeners ::print))
