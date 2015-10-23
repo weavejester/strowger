@@ -10,7 +10,7 @@
   (prn (event/event-key event)))
 
 (defn print-button [event]
-  (prn (event/event-button event)))
+  (prn [(event/event-button event) (event/client-xy event)]))
 
 (doto js/window
   (event/add-listeners ::keyboard {:keydown print-key})

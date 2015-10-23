@@ -41,6 +41,11 @@
   [event]
   (button->keyword (.-button event)))
 
+(defn client-xy
+  "Return the client X and Y coordinates of an event as an `[x y]` vector."
+  [event]
+  [(.-clientX event) (.-clientY event)])
+
 (defn- listener-map [element]
   (or (.-strowgerListeners element) {}))
 
