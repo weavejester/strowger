@@ -1,4 +1,4 @@
-(defproject strowger "0.1.0"
+(defproject strowger "0.1.1"
   :description "A ClojureScript library for managing DOM events"
   :url "https://github.com/weavejester/strowger"
   :license {:name "Eclipse Public License"
