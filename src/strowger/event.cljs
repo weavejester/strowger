@@ -1,23 +1,132 @@
 (ns strowger.event
   "Functions for managing DOM events."
   (:require [clojure.set :as set]
-            [clojure.string :as str]
-            [goog.object :as obj]
-            [goog.events :as events])
-  (:import goog.events.KeyCodes))
+            [clojure.string :as str]))
 
 (defn- convert-key [k]
   (-> k str/lower-case (str/replace "_" "-") keyword))
 
+;; Generated from goog.events.KeyCodes
 (def keyword->keycode
   "A map of the names of keyboard keys to their corresponding codes."
-  (persistent!
-   (reduce
-    (fn [m k]
-      (let [v (aget KeyCodes k)]
-        (if (fn? v) m (assoc! m (convert-key k) v))))
-    (transient {})
-    (array-seq (obj/getKeys KeyCodes)))))
+  {:win-key-ff-linux 0
+   :mac-enter 3
+   :backspace 8
+   :tab 9
+   :num-center 12
+   :enter 13
+   :shift 16
+   :ctrl 17
+   :alt 18
+   :pause 19
+   :caps-lock 20
+   :esc 27
+   :space 32
+   :page-up 33
+   :page-down 34
+   :end 35
+   :home 36
+   :left 37
+   :up 38
+   :right 39
+   :down 40
+   :print-screen 44
+   :insert 45
+   :delete 46
+   :zero 48
+   :one 49
+   :two 50
+   :three 51
+   :four 52
+   :five 53
+   :six 54
+   :seven 55
+   :eight 56
+   :nine 57
+   :ff-semicolon 59
+   :ff-equals 61
+   :question-mark 63
+   :at-sign 64
+   :a 65
+   :b 66
+   :c 67
+   :d 68
+   :e 69
+   :f 70
+   :g 71
+   :h 72
+   :i 73
+   :j 74
+   :k 75
+   :l 76
+   :m 77
+   :n 78
+   :o 79
+   :p 80
+   :q 81
+   :r 82
+   :s 83
+   :t 84
+   :u 85
+   :v 86
+   :w 87
+   :x 88
+   :y 89
+   :z 90
+   :meta 91
+   :mac-wk-cmd-left 91
+   :win-key-right 92
+   :mac-wk-cmd-right 93
+   :context-menu 93
+   :num-zero 96
+   :num-one 97
+   :num-two 98
+   :num-three 99
+   :num-four 100
+   :num-five 101
+   :num-six 102
+   :num-seven 103
+   :num-eight 104
+   :num-nine 105
+   :num-multiply 106
+   :num-plus 107
+   :num-minus 109
+   :num-period 110
+   :num-division 111
+   :f1 112
+   :f2 113
+   :f3 114
+   :f4 115
+   :f5 116
+   :f6 117
+   :f7 118
+   :f8 119
+   :f9 120
+   :f10 121
+   :f11 122
+   :f12 123
+   :numlock 144
+   :scroll-lock 145
+   :first-media-key 166
+   :ff-dash 173
+   :last-media-key 183
+   :semicolon 186
+   :equals 187
+   :comma 188
+   :dash 189
+   :period 190
+   :slash 191
+   :tilde 192
+   :apostrophe 192
+   :open-square-bracket 219
+   :backslash 220
+   :close-square-bracket 221
+   :single-quote 222
+   :win-key 224
+   :mac-ff-meta 224
+   :win-ime 229
+   :vk-noname 252
+   :phantom 255})
 
 (def keycode->keyword
   "A map of key codes to their corresponding keyboard key names."
@@ -25,7 +134,9 @@
 
 (def keyword->button
   "A map of the names of mouse buttons to their corresponding codes."
-  {:left 0, :middle 1, :right 2})
+  {:left 0
+   :middle 1
+   :right 2})
 
 (def button->keyword
   "A map of mouse button codes to their corresponding button names."
