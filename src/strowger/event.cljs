@@ -157,6 +157,27 @@
   [event]
   [(.-clientX event) (.-clientY event)])
 
+(defn- body-offset-xy [event target]
+  [(- (.-clientX event) (.-clientLeft target))
+   (- (.-clientY event) (.-clientTop target))])
+
+(defn- element-offset-xy [event target]
+  (let [rect (.getBoundingClientRect target)]
+    [(- (.-clientX event) (.-left rect) (.-clientLeft target))
+     (- (.-clientY event) (.-top rect)  (.-clientTop target))]))
+
+(defn offset-xy
+  "Return the offset X and Y coordinate of an event as an `[x y]` vector.
+  This function forces adherance to the W3C standard, avoiding cross-browser
+  issues with `.-offsetX` and `.-offsetY`."
+  [event]
+  (when-let [target (.-target event)]
+    (if (or (identical? target js/window) (identical? target js/document))
+      (client-xy event)
+      (if (identical? target js/document.body)
+        (body-offset-xy event target)
+        (element-offset-xy event target)))))
+
 (defn- listener-map [element]
   (or (.-strowgerListeners element) {}))
 
