@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.145" :scope "provided"]]
   :plugins [[lein-cljsbuild "1.1.0"]
-            [lein-codox "0.9.0"]]
+            [lein-codox "0.9.4"]]
   :codox {:language :clojurescript
           :metadata {:doc/format :markdown}
           :output-path "doc"}
