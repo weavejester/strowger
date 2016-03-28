@@ -8,10 +8,10 @@
   :plugins [[lein-cljsbuild "1.1.0"]
             [lein-codox "0.9.4"]]
   :codox
-  {:language :clojurescript
-   :metadata {:doc/format :markdown}
+  {:language    :clojurescript
+   :metadata    {:doc/format :markdown}
    :output-path "codox"
-   :source-uri "http://github.com/weavejester/strowger/blob/{version}/{filepath}#L{line}"}
+   :source-uri  "http://github.com/weavejester/strowger/blob/{version}/{filepath}#L{line}"}
   :cljsbuild
   {:builds {:main {:source-paths ["src"]
                    :compiler {:output-to "target/main.js"
