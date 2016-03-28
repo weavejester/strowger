@@ -6,7 +6,7 @@ A ClojureScript library for managing DOM events.
 
 To install, add the following dependency to your project file:
 
-    [strowger "0.1.2"]
+    [strowger "0.1.3"]
 
 ## Documentation
 
