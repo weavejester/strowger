@@ -10,7 +10,7 @@
   :codox
   {:language :clojurescript
    :metadata {:doc/format :markdown}
-   :output-path "doc"
+   :output-path "codox"
    :source-uri "http://github.com/weavejester/strowger/blob/{version}/{filepath}#L{line}"}
   :cljsbuild
   {:builds {:main {:source-paths ["src"]
