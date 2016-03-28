@@ -143,7 +143,8 @@
   (set/map-invert keyword->button))
 
 (defn event-key
-  "Return the name of the key pressed on a `:key-up` or `:key-down` event."
+  "Return the name of the key pressed on a `:keyup`, `:keydown` or `:keypress`
+  event."
   [event]
   (keycode->keyword (.-keyCode event)))
 
