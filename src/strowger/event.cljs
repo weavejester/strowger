@@ -210,3 +210,27 @@
     (remove-listeners key)
     (update-listener-map! assoc key listeners)
     (add-dom-listeners listeners)))
+
+(defn- wrap-keydown-stop-repeat [handler keys-held]
+  (fn [event]
+    (let [code (.-keyCode event)]
+      (when-not (contains? @keys-held code)
+        (swap! keys-held conj code)
+        (handler event)))))
+
+(defn- wrap-keyup-stop-repeat [handler keys-held]
+  (fn [event]
+    (let [code (.-keyCode event)]
+      (swap! keys-held disj code)
+      (handler event))))
+
+(defn stop-keydown-repeat
+  "Filter out repeated keydown events for the same key, caused by the keyboard
+  repeat rate. Takes a map of listeners (the same as [[add-listeners]]), and
+  returns the map with the `:keyup` and `:keydown` listeners altered to avoid
+  repetition."
+  [listeners]
+  (let [keys-held (atom #{})]
+    (-> listeners
+        (update :keydown (fnil wrap-keydown-stop-repeat (fn [_])) keys-held)
+        (update :keyup   (fnil wrap-keyup-stop-repeat   (fn [_])) keys-held))))
