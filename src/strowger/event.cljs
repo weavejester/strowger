@@ -194,22 +194,29 @@
     (.removeEventListener element (name type) listener)))
 
 (defn remove-listeners
-  "Remove all the listeners on a DOM element associated with the supplied key.
+  "Remove all the listeners on a DOM element associated with the supplied keys.
   See [[add-listeners]]."
-  [element key]
-  (doto element
-    (remove-dom-listeners (-> element listener-map (get key)))
-    (update-listener-map! dissoc key)))
+  ([element key]
+   (doto element
+     (remove-dom-listeners (-> element listener-map (get key)))
+     (update-listener-map! dissoc key)))
+  ([element key & keys]
+   (doseq [key (cons key keys)]
+     (remove-listeners element key))))
 
 (defn add-listeners
   "Add a map of event keywords to listener functions to a DOM element. The key
   argument is a unique value used to identify the listeners so that they can be
-  removed using [[remove-listeners]]."
-  [element key listeners]
-  (doto element
-    (remove-listeners key)
-    (update-listener-map! assoc key listeners)
-    (add-dom-listeners listeners)))
+  removed using [[remove-listeners]]. Multiple key and listener pairs may be
+  supplied as additional arguments."
+  ([element key listeners]
+   (doto element
+     (remove-listeners key)
+     (update-listener-map! assoc key listeners)
+     (add-dom-listeners listeners)))
+  ([element key listeners & key-listeners]
+   (doseq [[key listeners] (cons [key listeners] (partition 2 key-listeners))]
+     (add-listeners element key listeners))))
 
 (defn- wrap-keydown-stop-repeat [handler keys-held]
   (fn [event]

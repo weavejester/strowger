@@ -17,5 +17,6 @@
 (doto js/window
   (event/add-listeners ::keyboard (event/stop-keydown-repeat {:keydown print-key}))
   (event/add-listeners ::mouse {:click print-button})
-  (event/add-listeners ::print {:keydown print-event, :click print-event})
-  (event/remove-listeners ::print))
+  (event/add-listeners ::print-keys   {:keyup print-event, :keydown print-event}
+                       ::print-clicks {:click print-event})
+  (event/remove-listeners ::print-keys ::print-clicks))
